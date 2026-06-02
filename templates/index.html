@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Health Tracker</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>My Health Tracker</h1>
+
+    <form method="POST">
+        <label>Weight (kg): <input type="number" step="0.1" name="weight" required></label><br><br>
+        <label>Medication taken today: <input type="checkbox" name="medication"></label><br><br>
+        <label>Notes: <input type="text" name="notes" placeholder="How are you feeling?"></label><br><br>
+        <button type="submit">Log Today</button>
+    </form>
+
+    <h2>Your Logs</h2>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Weight</th>
+            <th>Medication</th>
+            <th>Notes</th>
+        </tr>
+        {% for log in logs %}
+        <tr>
+            <td>{{ log.date.strftime('%d %b %Y') }}</td>
+            <td>{{ log.weight }} kg</td>
+            <td>{{ 'Yes' if log.medication_taken else 'No' }}</td>
+            <td>{{ log.notes }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
